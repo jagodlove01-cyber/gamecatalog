@@ -3,14 +3,13 @@ from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-import os, uuid
+import os, uuid, certifi
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 from datetime import datetime, timezone
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
-import certifi
 client = AsyncIOMotorClient(os.environ['MONGO_URL'], tls=True, tlsCAFile=certifi.where())
 db = client[os.environ['DB_NAME']]
 app = FastAPI()
@@ -55,3 +54,4 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
