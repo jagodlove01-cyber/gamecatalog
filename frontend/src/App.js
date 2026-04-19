@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://gamecatalog-qgdv.onrender.com/api";
 export default function App() {
   const [page, setPage] = useState("login");
   const [isAdmin, setIsAdmin] = useState(false);
