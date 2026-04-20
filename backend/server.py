@@ -1,16 +1,17 @@
+Go to GitHub → backend/server.py → Edit → Select all → Delete → Paste this:
 
 from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-import os, uuid, certifi
+import os, uuid
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 from datetime import datetime, timezone
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
-client = AsyncIOMotorClient(os.environ['MONGO_URL'], tls=True, tlsCAFile=certifi.where())
+client = AsyncIOMotorClient(os.environ['MONGO_URL'], tls=True, tlsAllowInvalidCertificates=True, tlsAllowInvalidHostnames=True)
 db = client[os.environ['DB_NAME']]
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
@@ -54,4 +55,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
