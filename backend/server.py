@@ -1,4 +1,3 @@
-Go to GitHub → backend/server.py → Edit → Select all → Delete → Paste this:
 
 from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
